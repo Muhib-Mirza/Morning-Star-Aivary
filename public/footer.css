@@ -1,0 +1,30 @@
+.container1 {
+    width: 100vw !important;
+}
+
+.footer {
+    height: 20vh;
+    background-color: #083339;
+    margin-top: 2vh;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+}
+
+.foot-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact {
+    text-decoration: none;
+    color: white;
+    margin-left: 0.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+    .container1 {
+        width: 98.7vw !important;
+    }
+}

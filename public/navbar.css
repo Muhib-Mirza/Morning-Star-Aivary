@@ -1,0 +1,51 @@
+#navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #083339;
+}
+
+#navbar::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 80%;
+    opacity: 0.2;
+    z-index: -1;
+}
+
+#navbar ul {
+    display: flex;
+}
+
+#navbar ul li {
+    list-style: none;
+}
+
+#navbar ul li a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    display: block;
+    padding: 3px 22px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: white;
+}
+
+#navbar ul li a:hover {
+    background-color: white;
+    text-decoration: none;
+    color: black;
+}
+
+.ahome {
+    padding-top: 0.5rem;
+    margin-top: 0.4rem;
+    margin-right: 2rem;
+}
+
+.services {
+    margin-top: 0.9rem;
+    margin-left: 0.6rem;
+}

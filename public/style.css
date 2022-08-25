@@ -1,0 +1,144 @@
+.carousal-text {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 25rem;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.simage {
+    height: 30rem;
+    z-index: -1;
+    background-color: black;
+}
+
+.above {
+    position: absolute;
+    top: 0;
+    height: 30rem;
+    z-index: 0;
+    width: 100%;
+    background-color: black;
+    opacity: 0.1;
+}
+
+.about-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.icon {
+    position: absolute;
+    top: 0.3rem;
+    left: 0.2rem;
+    height: 3rem;
+}
+
+.text-big {
+    font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+.text-small {
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin-left: 1;
+    margin-left: 1;
+}
+
+.offcanvas-body {
+    padding-left: 0 !important;
+    padding-top: 0 !important;
+}
+
+.dlist a {
+    margin-left: 1rem;
+    text-decoration: none;
+    color: black;
+    font-family: sans-serif;
+}
+
+.dhead {
+    margin-left: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dropbtn {
+    background-color: #03424C !important;
+    color: white !important;
+}
+
+.mnumber {
+    display: flex;
+    flex-direction: row;
+}
+
+.drawer {
+    background-color: transparent;
+    position: absolute;
+    top: 0.5rem;
+    left: 1rem;
+    z-index: 1;
+    border: none;
+}
+
+@media screen and (max-width: 540px) {
+    .gal1 {
+        height: 18vh;
+    }
+    .gal2 {
+        height: 18vh;
+    }
+    .simage {
+        height: 15rem;
+    }
+    .above {
+        height: 15rem;
+    }
+    .carousal-text {
+        height: 14rem;
+    }
+    .gcontainer {
+        height: 10.3rem;
+    }
+    .ft-text {
+        font-size: 1.5rem;
+        margin-left: 0.9rem;
+    }
+    .foot-text {
+        width: 20rem;
+    }
+    .gal1 {
+        margin-left: 0.7rem;
+    }
+    .mbview {
+        margin-top: 0.9rem !important;
+    }
+    .elevation {
+        box-shadow: 8px 7px 8px #aaaaaa;
+    }
+    .contact {
+        margin-left: 0.7rem !important;
+    }
+    .mnumber {
+        margin-left: 1.5rem !important;
+    }
+    .drawer {
+        left: 0rem;
+    }
+    #offcanvasExample {
+        width: 70vw !important;
+    }
+    .navbar {
+        margin-left: 0.6rem !important;
+    }
+}
