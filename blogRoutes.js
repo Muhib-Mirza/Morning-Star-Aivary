@@ -129,6 +129,14 @@ router.post('/add-card', upload.single('birdImage') ,(req,res)=>{
     userdata.save().then((result)=>res.redirect('/')).catch((err)=>console.log(err));
     
 })
+
+// router.delete('/blog/:id', (req,res)=>{
+//     let id = req.params.id;
+//     Blog.findByIdAndDelete(id).then((result=>{
+//         res.render('/');
+//     }))
+// })
+
 router.use((req,res)=>{
     res.status(404).render('404');
 })
