@@ -9,7 +9,7 @@ const env = require("dotenv").config();
 const mdb = `${process.env.MONGO_URL}`;
 
 mongoose.connect(mdb).then(()=>{
-    app.listen(4000,'localhost',()=>console.log("Server Created"));
+    app.listen(process.env.PORT || 4000,'localhost',()=>console.log("Server Created"));
 });
 
 app.set('view engine', 'ejs');
