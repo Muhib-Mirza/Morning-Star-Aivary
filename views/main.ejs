@@ -6,35 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<style>
-    form{
-        display: flex;
-        flex-direction: column;
-        width: 50vw;
-        margin: auto;
-        height: 20rem;
-        border: 2px solid rgb(45, 255, 237);
-    }
-    input{
-        width: 10rem;
-        margin-top: 1rem;
-        outline: none;
-    }
-    button{
-        width: 2rem;
-        height: 1.5rem;
-        text-align: center;
-        background-color: lightpink;
-        font-weight: bold;
-        color: black;
-    }
-</style>
 <body>
-    <form action="/adddata" method="post" enctype="multipart/form-data">
-        <input type="text" name="bid" placeholder="Enter Bird Id">
-        <input type="text" name="birdname" placeholder="Enter Bird Name">
-        <input type="number" name="cost" >
-        <input type="file" name="bimage" >
+    <form action="/signin" method="post">
+        <input type="email" name="email" placeholder="Enter Email">
+        <input type="password" name="pass" placeholder="Enter Password">
         <button type="submit">Submit</button>
     </form>
 </body>

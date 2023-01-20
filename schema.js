@@ -17,7 +17,7 @@ const imageSchema = new Schema({
     },
     image:{
         data:Buffer,
-        contentType:String,
+        contentType:String
     }
 });
 
