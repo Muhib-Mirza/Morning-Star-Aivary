@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 const mdb = `${process.env.MONGO_URL}`;
 
 mongoose.connect(mdb).then(()=>{
-    app.listen(process.env.PORT || 4000,'localhost',()=>console.log("Server Created"));
+    app.listen(4000,'localhost',()=>console.log("Server Created"));
 });
 
 app.use(cookieParser());

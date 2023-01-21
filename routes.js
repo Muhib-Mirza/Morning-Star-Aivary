@@ -8,7 +8,7 @@ const user = require("./userSchema");
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
 
-multer({ dest: "upload" });
+multer({ dest: "upload"});
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -17,9 +17,22 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
+  
 });
-
-const upload = multer({ storage });
+const maxSize = 3 * 1024 * 1024;
+const upload = multer({ storage,
+  fileFilter:(req,file,cb)=>{
+    if(file.mimetype == "img/png" || file.mimetype == "img/jpg" || file.mimetype == "img/svg" || file.mimetype == "img/jpeg"){
+      cb(null, true);
+    }else{
+      cb(null, false);
+      return cb(new Error("Please Enter Image"));
+    }
+  },
+  limits:{
+    fileSize: maxSize
+  }
+ });
 
 router.get("/", (req, res) => {
   res.render("main");
