@@ -19,16 +19,8 @@ const storage = multer.diskStorage({
   },
   
 });
-const maxSize = 3 * 1024 * 1024;
+const maxSize = 3*1024*1024;
 const upload = multer({ storage,
-  fileFilter:(req,file,cb)=>{
-    if(file.mimetype == "img/png" || file.mimetype == "img/jpg" || file.mimetype == "img/svg" || file.mimetype == "img/jpeg"){
-      cb(null, true);
-    }else{
-      cb(null, false);
-      return cb(new Error("Please Enter Image"));
-    }
-  },
   limits:{
     fileSize: maxSize
   }
