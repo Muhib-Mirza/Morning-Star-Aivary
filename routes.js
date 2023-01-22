@@ -21,6 +21,14 @@ const storage = multer.diskStorage({
 });
 const maxSize = 3*1024*1024;
 const upload = multer({ storage,
+  fileFilter:(req,file,cb)=>{
+    if(file.mimetype == "img/png" || file.mimetype == "img/jpg" || file.mimetype == "img/svg" || file.mimetype == "img/jpeg"){
+      cb(null, true);
+    }else{
+      cb(null, false);
+      return cb(new Error("Please Enter Image"));
+    }
+  },
   limits:{
     fileSize: maxSize
   }
@@ -30,15 +38,15 @@ router.get("/", (req, res) => {
   res.render("main");
 });
 
-router.post("/register", (req, res) => {
-  bcrypt.hash(req.body.pass, salt).then((result) => {
-    const userdata = new user({
-      email: req.body.email,
-      pass: result,
-    });
-    userdata.save();
-  });
-});
+// router.post("/register", (req, res) => {
+//   bcrypt.hash(req.body.pass, salt).then((result) => {
+//     const userdata = new user({
+//       email: req.body.email,
+//       pass: result,
+//     });
+//     userdata.save();
+//   });
+// });
 
 // router.get("/getcookie", (req, res) => {  
 //     if(!req.cookies.jwt){
@@ -100,8 +108,8 @@ router.post("/adddata", upload.single("bimage"), (req, res) => {
       birdname: name,
       birdcost: cost,
       image: {
-        data: fs.readFileSync("upload/" + req.file.filename),
-        contentType: "img/png",
+        data: fs.readFileSync("upload/" + req.file.filename,"base64"),
+        contentType:`${req.file.mimetype}`
       },
     });
     udata.save();
