@@ -101,7 +101,7 @@ router.post("/adddata", upload.single("bimage"), (req, res) => {
     const name = req.body.birdname;
     const cost = req.body.birdcost;
     const udata = new Schema({
-      birdid: id,
+      birdid: id.toLowerCase(),
       birdname: name,
       birdcost: cost,
       image: {
