@@ -29,9 +29,6 @@ const upload = multer({ storage,
       return cb(new Error("Please Enter Image"));
     }
   },
-  limits:{
-    fileSize: maxSize
-  }
  });
 
 router.get("/", (req, res) => {
@@ -129,5 +126,19 @@ router.get("/:name", (req, res) => {
     res.send(result);
   });
 });
+
+router.delete("/:id",(re,res)=>{
+  Schema.findByIdAndDelete(id).then(result=>{
+    console.log(result);
+    if(result == true){
+      res.send(true);
+    }else{
+      res.send(false);
+    }
+  }).catch(err=>{
+    res.send(false);
+    console.log(err);
+  })
+})
 
 module.exports = router;
