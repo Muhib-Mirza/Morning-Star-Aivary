@@ -3,10 +3,9 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const Schema = require("./schema");
-const jwt = require("jsonwebtoken");
 const user = require("./userSchema");
 const bcrypt = require("bcryptjs");
-const salt = bcrypt.genSaltSync(10);
+const sharp = require("sharp");
 
 multer({ dest: "upload"});
 
@@ -19,49 +18,12 @@ const storage = multer.diskStorage({
   },
   
 });
-const maxSize = 3*1024*1024;
-const upload = multer({ storage,
-  fileFilter:(req,file,cb)=>{
-    if(file.mimetype == "img/png" || file.mimetype == "img/jpg" || file.mimetype == "img/svg" || file.mimetype == "img/jpeg"){
-      cb(null, true);
-    }else{
-      cb(null, false);
-      return cb(new Error("Please Enter Image"));
-    }
-  },
- });
+
+const upload = multer({ storage});
 
 router.get("/", (req, res) => {
   res.render("main");
 });
-
-// router.post("/register", (req, res) => {
-//   bcrypt.hash(req.body.pass, salt).then((result) => {
-//     const userdata = new user({
-//       email: req.body.email,
-//       pass: result,
-//     });
-//     userdata.save();
-//   });
-// });
-
-// router.get("/getcookie", (req, res) => {  
-//     if(!req.cookies.jwt){
-//         res.json({"message":"Please Signin Again"})
-//     }
-//     else{
-//         let token = req.cookies.jwt;
-//         let result = jwt.verify(token, "HelloIAmTheSecretKeyOfTheJsonWebToken");
-//         if(result === true)
-//         {
-//             res.json({"message":"Success"});
-//         }
-//         else{
-//             res.json({"message":"Failed"});
-//         }
-//     }
-//     next();
-// });
 
 router.post("/signin", (req, res) => {
   user
@@ -73,15 +35,6 @@ router.post("/signin", (req, res) => {
         .compare(req.body.pass, result.pass)
         .then((result) => {
           if (result === true) {
-            // const token = jwt.sign(
-            //     { email: req.body.email },
-            //     "HelloIAmTheSecretKeyOfTheJsonWebToken",
-            //     { expiresIn: "7d" }
-            //   );
-            //   res.cookie("jwt", token, {
-            //     httpOnly: true,
-            //     expires: new Date(Date.now() + 604800000),
-            //   });
               res.json({"message":"Success"});
           } else {
             res.json({"message":"Error"});
@@ -93,10 +46,14 @@ router.post("/signin", (req, res) => {
     });
 });
 
-router.post("/adddata", upload.single("bimage"), (req, res) => {
+router.post("/adddata", upload.single("bimage"), async (req, res) => {
   if (!req.body) {
     res.send("Enter Correct Data");
   } else {
+    const image = await sharp(`upload/${req.file.filename}`)
+    .resize({width:910, height:414, fit:"contain"})
+    .jpeg({quality:80})
+    .toBuffer();
     const id = req.body.birdid;
     const name = req.body.birdname;
     const cost = req.body.birdcost;
@@ -105,8 +62,8 @@ router.post("/adddata", upload.single("bimage"), (req, res) => {
       birdname: name,
       birdcost: cost,
       image: {
-        data: fs.readFileSync("upload/" + req.file.filename,"base64"),
-        contentType:`${req.file.mimetype}`
+        data: image,
+        contentType:"img/jpeg"
       },
     });
     udata.save();
@@ -127,7 +84,7 @@ router.get("/:name", (req, res) => {
   });
 });
 
-router.delete("/:id",(re,res)=>{
+router.delete("/:id",(req,res)=>{
   Schema.findByIdAndDelete(id).then(result=>{
     console.log(result);
     if(result == true){
